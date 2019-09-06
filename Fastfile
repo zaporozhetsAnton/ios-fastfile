@@ -1,4 +1,5 @@
 # Change IPA_NAME in upload_to_testflight function to the name of your project
+# Change PROJECT_SCHEME in build_app function to the scheme name of your project
 
 default_platform(:ios)
 
@@ -34,7 +35,7 @@ platform :ios do
         lane :build do
             match(type: "adhoc")
             build_app(
-                scheme: "Farmgate",
+                scheme: "PROJECT_SCHEME",
                 silent: true,
                 output_directory: "~/Desktop/Project_Build",
                 configuration: "Release",
@@ -47,7 +48,7 @@ platform :ios do
         lane :release do
             match(type: "appstore")
             build_app(
-                scheme: "Farmgate",
+                scheme: "PROJECT_SCHEME",
                 silent: true,
                 export_method: "app-store",
                 clean: true,
