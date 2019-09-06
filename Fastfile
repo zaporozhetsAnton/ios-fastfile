@@ -1,17 +1,4 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+# Change IPA_NAME in upload_to_testflight function to the name of your project
 
 default_platform(:ios)
 
@@ -49,7 +36,7 @@ platform :ios do
             build_app(
                 scheme: "Farmgate",
                 silent: true,
-                output_directory: "~/Desktop/FarmGateBuild",
+                output_directory: "~/Desktop/Project_Build",
                 configuration: "Release",
                 export_method: "ad-hoc",
                 clean: true
@@ -70,7 +57,7 @@ platform :ios do
             upload_to_testflight(
                 skip_submission: true,
                 skip_waiting_for_build_processing: true,
-                ipa: "build/FarmGate.ipa"
+                ipa: "build/IPA_NAME.ipa"
             )
     end
 
