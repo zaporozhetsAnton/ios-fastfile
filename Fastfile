@@ -4,6 +4,17 @@
 default_platform(:ios)
 
 platform :ios do
+    
+    before_all do
+        if is_ci?
+            begin
+                delete_keychain
+            rescue => ex
+                UI.error(ex)
+            end
+            create_keychain(default_keychain: true, unlock: true, timeout: 3600)
+        end
+    end
 
     desc "Sync of certificates and provision profiles"
         lane :certificates do
@@ -37,7 +48,7 @@ platform :ios do
             build_app(
                 scheme: "PROJECT_SCHEME",
                 silent: true,
-                output_directory: "~/Desktop/Project_Build",
+                output_directory: "build",
                 configuration: "Release",
                 export_method: "ad-hoc",
                 clean: true
