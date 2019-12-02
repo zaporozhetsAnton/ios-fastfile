@@ -15,6 +15,20 @@ platform :ios do
             create_keychain(default_keychain: true, unlock: true, timeout: 3600)
         end
     end
+    
+    error do |lane, exception|
+		if is_ci?
+			begin
+				delete_keychain
+			rescue => ex
+				UI.error(ex)
+			end
+		end
+	end
+
+	after_all do
+		delete_keychain if is_ci?
+	end
 
     desc "Sync of certificates and provision profiles"
         lane :certificates do
